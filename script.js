@@ -3,7 +3,9 @@ const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
+const changeBackgroundBtn = document.getElementById('change-background');
 const loader = document.getElementById('loader');
+const bodyTag = document.body;
 
 function showLoadingSpinner() {
     loader.hidden = false;
@@ -53,8 +55,23 @@ function tweetQuote() {
 }
 
 //Event Listerners
+changeBackgroundBtn.addEventListener('click',randomizeBackground);
 newQuoteBtn.addEventListener('click', getQuoteFromAPI);
 twitterBtn.addEventListener('click',tweetQuote);
 
+//Randomize Background
+function randomizeBackground() {
+    let randomNumber = getRandomNumber(0,28);
+    bodyTag.style.backgroundImage = backgroundArray[randomNumber];
+}
+
+//Random Number Generator between two given numbers including themselves
+function getRandomNumber(firstNumber, lastNumber) {
+    firstNumber = Math.ceil(firstNumber); 
+    lastNumber = Math.floor(lastNumber); 
+    return Math.floor(Math.random() * (lastNumber - firstNumber + 1)) + firstNumber; 
+}
+
 //On Load
 getQuoteFromAPI();
+randomizeBackground();
